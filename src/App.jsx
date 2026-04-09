@@ -13,6 +13,7 @@ function App(){
   let [winner,changeWinner]=useState("")
   let [totalround,changeround]=useState(0)
   let [streak, changeStreak]=useState(0)
+  let [history, setHistory] = useState([])
 
   function handleClick(_usermove){
     let _winner=""
@@ -48,6 +49,7 @@ function App(){
     changeWinner(_winner)
     changeround(_rounds)
     changeStreak(_streak)
+    setHistory([...history, `You: ${_usermove} | Computer: ${_computermove} | ${_winner}`])
   }
   function resetScores(){
       _userscore=0
@@ -57,6 +59,7 @@ function App(){
       changeScore(0)
       changeround(0)
       changeStreak(0)
+      setHistory([])
     }
 
 
@@ -98,6 +101,10 @@ function App(){
     <div className="statsRow">
   <h2 className='roundsPlayes'>Rounds Played: {totalround}</h2>
   <h2 className='userStreak'>User streak: {streak}</h2>
+</div>
+<div>
+  <h3 className='History'>History</h3>
+  {history.map((h, i) => <p key={i}>{h}</p>)}
 </div>
 </div>
   )
